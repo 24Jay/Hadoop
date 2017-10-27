@@ -37,5 +37,15 @@ export PATH=$PATH:$PHANTOMJS
 ```shell
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.URLCat hdfs://localhost/workers.sh
 ```
+---
 
-
+### 3. ListStatus
+```shell
+$ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.ListStatus hdfs://localhost/ hdfs://localhost/user/jay/
+hdfs://localhost/profile
+hdfs://localhost/user
+hdfs://localhost/workers.sh
+hdfs://localhost/user/jay/books
+hdfs://localhost/user/jay/hadoop-daemon.sh
+hdfs://localhost/user/jay/output
+```

@@ -1,4 +1,5 @@
 com/hadp/hdfs/URLCat.class
 com/hadp/MaxTemperature.class
 com/hadp/TemperatureReducer.class
+com/hadp/hdfs/ListStatus.class
 com/hadp/TemperatureMapper.class
