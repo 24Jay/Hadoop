@@ -61,3 +61,11 @@ hdfs://localhost/user/jay/output
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.FileCopyWithProgress ~/hello.go hdfs://localhost/user/jay/hello.go
 ......
 ```
+
+### 5. 通过distcp并行复制
+```shell
+# distcp的典型应用场景是在两个HDFS集群之间传输数据
+$ hadoop distcp hdfs://localhost/user/jay/hello.go hdfs://localhost/
+$ hadoop distcp -update hdfs://localhost/user/jay/hello.go hdfs://localhost/
+$ hadoop distcp -override hdfs://localhost/user/jay/hello.go hdfs://localhost/
+```
