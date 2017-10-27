@@ -12,6 +12,9 @@ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.MaxTemperature file:///media/
 ### 2. URLCat
 针对本地文件
 ```shell
+# FileSystemCat
+$ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.FileSystemCat file:///etc/profile
+
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.URLCat file:///etc/profile
 ...
 
@@ -37,6 +40,8 @@ export PATH=$PATH:$PHANTOMJS
 ```shell
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.URLCat hdfs://localhost/workers.sh
 ```
+
+
 ---
 
 ### 3. ListStatus
@@ -48,4 +53,11 @@ hdfs://localhost/workers.sh
 hdfs://localhost/user/jay/books
 hdfs://localhost/user/jay/hadoop-daemon.sh
 hdfs://localhost/user/jay/output
+```
+
+----
+### 4. 写入数据: FileCopyWithProgress
+```shell
+$ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.FileCopyWithProgress ~/hello.go hdfs://localhost/user/jay/hello.go
+......
 ```
