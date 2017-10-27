@@ -2,7 +2,7 @@
 [参考知识总结](https://24jay.github.io/2017/10/24/IntroductionToHadoop/#more)
 
 ### 1. MaxTemperature
-```python
+```shell
 # 安装启动了HDFS之后, 引用本地文件必须使用file://...
 hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.MaxTemperature file:///media/jay/Study/Hadoop/NCDC/ output
 ```
@@ -11,7 +11,7 @@ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.MaxTemperature file:///media/
 
 ### 2. URLCat
 针对本地文件
-```python
+```shell
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.URLCat file:///etc/profile
 ...
 
@@ -34,7 +34,7 @@ export PATH=$PATH:$PHANTOMJS
 
 ```
 或者针对hdfs文件
-```python
+```shell
 $ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.hdfs.URLCat hdfs://localhost/workers.sh
 ```
 
