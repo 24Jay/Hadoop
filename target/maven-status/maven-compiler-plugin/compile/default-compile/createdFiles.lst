@@ -1,8 +1,0 @@
-com/hadp/hdfs/URLCat.class
-com/hadp/hdfs/FileCopyWithProgress.class
-com/hadp/hdfs/FileSystemCat.class
-com/hadp/MaxTemperature.class
-com/hadp/TemperatureReducer.class
-com/hadp/hdfs/ListStatus.class
-com/hadp/hdfs/FileCopyWithProgress$1.class
-com/hadp/TemperatureMapper.class
