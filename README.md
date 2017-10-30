@@ -148,3 +148,14 @@ hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.zkper.ListGroup localhost zoo
 ~/Eclipse/workspace/hadoop/target/classes $ export CLASSPATH=/home/jay/Eclipse/workspace/hadoop/target/classes:$ZOOKEEPER_INSTALL/*:$ZOOKEEPER_INSTALL/lib/*:$ZOOKEEPER_INSTALL/conf
 ~/Eclipse/workspace/hadoop/target/classes$ java com.hadp.zkper.ListGroup localhost zoo
 ```
+
+**3.3 使用zookeeper实现分布式Configer**
+代码参考com.hadp.zkper.configExample
+```python
+#首先运行setter
+hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.zkper.configExample.ConfigUpdater localhost
+
+#然后运行watcher, 观察配置项目的变化
+hadoop jar target/hadp-0.0.1-SNAPSHOT.jar com.hadp.zkper.configExample.ConfigWatcher localhost
+```
+
