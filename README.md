@@ -109,6 +109,21 @@ ZooKeeper -server host:port cmd args
 $  zkCli.sh -server localhost ls /
 [zoo, zookeeper, hbase]
 
+#获取znode的信息
+zkCli.sh  -server localhost get /zoo/goat-0000000007
+WatchedEvent state:SyncConnected type:None path:null
+Hello Zookeeper
+cZxid = 0xe8
+ctime = Mon Oct 30 13:22:08 CST 2017
+mZxid = 0xe8
+mtime = Mon Oct 30 13:22:08 CST 2017
+pZxid = 0xe8
+cversion = 0
+dataVersion = 0
+aclVersion = 0
+ephemeralOwner = 0x0
+dataLength = 15
+numChildren = 0
 ```
 
 **3.2 JavaAPI操作zookeeper**
