@@ -5,26 +5,22 @@ import java.io.IOException;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapred.MapReduceBase;
-import org.apache.hadoop.mapred.Mapper;
-import org.apache.hadoop.mapred.OutputCollector;
-import org.apache.hadoop.mapred.Reporter;
+import org.apache.hadoop.mapreduce.Mapper;
 
-import com.hadp.mapred.NcdcRecordParser;
 
 /**
  * Hello world!
  *
  */
-public class TemperatureMapper extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable>
+public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWritable>
 {
-
 	private NcdcRecordParser parser = new NcdcRecordParser();
 
-	public void map(LongWritable arg0, Text arg1, OutputCollector<Text, IntWritable> arg2, Reporter arg3)
-			throws IOException
+	@Override
+	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
+			throws IOException, InterruptedException
 	{
-		String line = arg1.toString();
+		String line = value.toString();
 		if (line.length() < 93)
 			return;
 
@@ -34,7 +30,9 @@ public class TemperatureMapper extends MapReduceBase implements Mapper<LongWrita
 		{
 			String year = parser.getYear();
 			int airTemperature = parser.getAirTemperature();
-			arg2.collect(new Text(year), new IntWritable(airTemperature));
+			context.write(new Text(year), new IntWritable(airTemperature));
 		}
 	}
+
+	
 }
