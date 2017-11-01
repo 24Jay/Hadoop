@@ -1,4 +1,4 @@
-package com.hadp;
+package com.hadp.mapred.chap2;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -20,8 +20,9 @@ public class TemperatureReducer extends MapReduceBase implements Reducer<Text, I
 		int minValue = Integer.MAX_VALUE;
 		while (arg1.hasNext())
 		{
-			maxValue = Math.max(maxValue, arg1.next().get());
-			minValue = Math.min(minValue, arg1.next().get());
+			int value = arg1.next().get();
+			maxValue = Math.max(maxValue, value);
+			minValue = Math.min(minValue, value);
 		}
 		arg2.collect(arg0, new IntWritable(maxValue));
 	}

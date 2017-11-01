@@ -23,7 +23,8 @@ public class PrintConfiguration
 		 */
 		System.out.println(">>>>>>>fs.default.name="+conf.get("fs.default.name"));
 		System.out.println(">>>>>>>dfs.replication="+conf.get("dfs.replication"));
-		conf.addDefaultResource("hdfs-site.xml");
+		Configuration.addDefaultResource("hdfs-site.xml");
+		//或者是conf.addDefaultResource("hdfs-site.xml");
 		System.out.println(">>>>>>>dfs.replication="+conf.get("dfs.replication"));
 		System.out.println(">>>>>>>hostname="+conf.get("hostname"));
 	}

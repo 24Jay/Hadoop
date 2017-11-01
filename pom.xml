@@ -19,7 +19,7 @@
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-core</artifactId>
-			<version>1.0.0</version>
+			<version>1.2.1</version>
 		</dependency>
 		<!-- Unit test artifacts -->
 		<dependency>
@@ -42,12 +42,12 @@
 			<!--<classifier>hadoop1</classifier> -->
 			<!--<scope>test</scope> -->
 		</dependency>
-		<dependency>
+		<!-- dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-test</artifactId>
-			<version>1.0.0</version>
-			<!--<scope>test</scope> -->
-		</dependency>
+			<version>2.6.0-mr1-cdh5.12.1</version>
+			<scope>test</scope>
+		</dependency-->
 		<!-- Missing dependency for running mini clusters -->
 		<dependency>
 			<groupId>com.sun.jersey</groupId>

@@ -1,4 +1,4 @@
-package com.hadp;
+package com.hadp.mapred.chap2;
 
 import java.io.IOException;
 
@@ -20,6 +20,8 @@ public class MaxTemperature
 			System.exit(-1);
 		}
 		JobConf conf = new JobConf(MaxTemperature.class);
+		
+		conf.addDefaultResource("mapred-site.xml");
 		conf.setJobName("Max Temperature");
 
 		FileInputFormat.addInputPath(conf, new Path(ar[0]));

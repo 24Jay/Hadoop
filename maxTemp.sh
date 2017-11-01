@@ -1,8 +1,8 @@
 #!/bin/bash
 echo "Year"  "Max"     "  Min"
-
-cd /home/jay/Eclipse/workspace/hadoop/input
-for file in ./*
+cd $1
+#cd /home/jay/hadoop/temperature/input/
+for file in ./*.txt
 do
 	
 	name=$(basename $file)
