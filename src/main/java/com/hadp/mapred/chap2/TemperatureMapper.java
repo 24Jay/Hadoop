@@ -7,11 +7,10 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
+import com.hadp.mapred.NcdcRecordParser;
 
-/**
- * Hello world!
- *
- */
+
+
 public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWritable>
 {
 	private NcdcRecordParser parser = new NcdcRecordParser();

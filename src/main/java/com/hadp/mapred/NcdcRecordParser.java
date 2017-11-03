@@ -1,4 +1,4 @@
-package com.hadp.mapred.chap2;
+package com.hadp.mapred;
 
 import com.sun.jersey.core.impl.provider.entity.XMLJAXBElementProvider.Text;
 

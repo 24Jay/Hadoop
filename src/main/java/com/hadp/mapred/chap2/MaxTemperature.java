@@ -19,14 +19,22 @@ public class MaxTemperature
 			System.exit(-1);
 		}
 		Job job = new Job();
-
+		/***
+		 * Hadoop会通过这里指定的class去寻找相对应的jar文件
+		 */
 		job.setJarByClass(MaxTemperature.class);
 		job.setJobName("Max Temperature");
+
+		/***
+		 * 这里用的是add. 所以可以添加多个
+		 */
 		FileInputFormat.addInputPath(job, new Path(ar[0]));
 		FileOutputFormat.setOutputPath(job, new Path(ar[1]));
 
 		job.setMapperClass(TemperatureMapper.class);
-		job.setReducerClass(TemperatureReducer.class);
+		// job.setReducerClass(MaxReducer.class);
+		job.setReducerClass(MaxMinReducer.class);
+
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
