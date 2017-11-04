@@ -1,6 +1,6 @@
 package com.hadp.mapred;
 
-import com.sun.jersey.core.impl.provider.entity.XMLJAXBElementProvider.Text;
+import org.apache.hadoop.io.Text;
 
 public class NcdcRecordParser
 {
@@ -9,10 +9,12 @@ public class NcdcRecordParser
 	private String year;
 	private int airTemperature;
 	private String quality;
+	private String station;
 
 	public void parse(String record)
 	{
 		year = record.substring(15, 19);
+		station = record.substring(4,15);
 		String airTempString;
 
 		if (record.charAt(87) == '+')
@@ -45,5 +47,10 @@ public class NcdcRecordParser
 	public int getAirTemperature()
 	{
 		return airTemperature;
+	}
+	
+	public String getStation()
+	{
+		return station;
 	}
 }

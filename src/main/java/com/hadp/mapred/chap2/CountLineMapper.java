@@ -6,8 +6,6 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import com.yammer.metrics.core.Counter;
-
 public class CountLineMapper extends Mapper<LongWritable, Text, LongWritable, Text>
 {
 	private static long counter = 0;

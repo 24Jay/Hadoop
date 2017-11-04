@@ -5,8 +5,8 @@ import java.io.IOException;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
+import org.apache.hadoop.mapred.lib.CombineFileInputFormat;
 import org.apache.hadoop.mapreduce.Job;
-import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
 public class MaxTemperature
@@ -28,7 +28,8 @@ public class MaxTemperature
 		/***
 		 * 这里用的是add. 所以可以添加多个
 		 */
-		FileInputFormat.addInputPath(job, new Path(ar[0]));
+//		FileInputFormat.addInputPath(job, new Path(ar[0]));　
+		CombineFileInputFormat.addInputPath(job, new Path(ar[0]));
 		FileOutputFormat.setOutputPath(job, new Path(ar[1]));
 
 		job.setMapperClass(TemperatureMapper.class);

@@ -9,16 +9,18 @@ import org.apache.hadoop.mapreduce.Mapper;
 
 import com.hadp.mapred.NcdcRecordParser;
 
-
-
 public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWritable>
 {
+	private static long counter = 0;
+
 	private NcdcRecordParser parser = new NcdcRecordParser();
 
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
 			throws IOException, InterruptedException
 	{
+		System.out.println("TemperatureMapper : counter = " + (++counter) + " key = " + key.get());
+
 		String line = value.toString();
 		if (line.length() < 93)
 			return;
@@ -31,7 +33,7 @@ public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWrita
 			int airTemperature = parser.getAirTemperature();
 			context.write(new Text(year), new IntWritable(airTemperature));
 		}
+		System.out.println("TemperatureMapperKey = " + key);
 	}
 
-	
 }
