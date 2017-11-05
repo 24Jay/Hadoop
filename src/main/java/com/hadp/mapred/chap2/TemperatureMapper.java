@@ -7,13 +7,21 @@ import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
-import com.hadp.mapred.NcdcRecordParser;
+import com.hadp.mapred.NcdcRecord;
 
 public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWritable>
 {
 	private static long counter = 0;
 
-	private NcdcRecordParser parser = new NcdcRecordParser();
+	/***
+	 * 用户自己定义的计数器, 可以在最后的总结统计输出中看到
+	 * @author jay
+	 *
+	 */
+	enum Temperature
+	{
+		MISSING, MALFORMED
+	}
 
 	@Override
 	protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, IntWritable>.Context context)
@@ -21,17 +29,22 @@ public class TemperatureMapper extends Mapper<LongWritable, Text, Text, IntWrita
 	{
 		System.out.println("TemperatureMapper : counter = " + (++counter) + " key = " + key.get());
 
-		String line = value.toString();
-		if (line.length() < 93)
-			return;
+		NcdcRecord record = new NcdcRecord(value);
 
-		parser.parse(line);
-
-		if (parser.isValidTemperature())
+		if (record.isMalformed())
 		{
-			String year = parser.getYear();
-			int airTemperature = parser.getAirTemperature();
+			context.getCounter(Temperature.MALFORMED).increment(1);
+		}
+		else if (record.isMissing())
+		{
+			context.getCounter(Temperature.MISSING).increment(1);
+		}
+		else
+		{
+			String year = record.getYear();
+			int airTemperature = record.getAirTemperature();
 			context.write(new Text(year), new IntWritable(airTemperature));
+			context.getCounter("TemperatureQuality", record.getQuality()).increment(1);
 		}
 		System.out.println("TemperatureMapperKey = " + key);
 	}

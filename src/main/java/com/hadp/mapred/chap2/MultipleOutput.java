@@ -2,11 +2,8 @@ package com.hadp.mapred.chap2;
 
 import java.io.IOException;
 
-import org.apache.commons.lang.ObjectUtils.Null;
-import org.apache.hadoop.classification.InterfaceAudience.Private;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
-import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
@@ -20,22 +17,21 @@ import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-import com.hadp.mapred.NcdcRecordParser;
+import com.hadp.mapred.NcdcRecord;
 
 public class MultipleOutput extends Configured implements Tool
 {
 
 	static class MultipleMapper extends Mapper<LongWritable, Text, Text, Text>
 	{
-		private NcdcRecordParser parser = new NcdcRecordParser();
 
 		@Override
 		protected void map(LongWritable key, Text value, Mapper<LongWritable, Text, Text, Text>.Context context)
 				throws IOException, InterruptedException
 		{
-			parser.parse(value);
-			String airTemperature = parser.getAirTemperature()+"";
-			context.write(new Text(parser.getStation()), new Text(airTemperature));
+			NcdcRecord record = new NcdcRecord(value);
+			String airTemperature = record.getAirTemperature()+"";
+			context.write(new Text(record.getStation()), new Text(airTemperature));
 		}
 
 	}

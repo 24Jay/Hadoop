@@ -2,19 +2,30 @@ package com.hadp.mapred;
 
 import org.apache.hadoop.io.Text;
 
-public class NcdcRecordParser
+public class NcdcRecord
 {
 	private static final int MISSING_TEMPERATURE = 9999;
+
+	private String record;
 
 	private String year;
 	private int airTemperature;
 	private String quality;
 	private String station;
 
+	public NcdcRecord(Text record)
+	{
+		this.record = record.toString();
+		parse(this.record);
+	}
+
 	public void parse(String record)
 	{
-		year = record.substring(15, 19);
-		station = record.substring(4,15);
+		if (isMalformed())
+			return;
+
+		station = record.substring(4, 15);
+		year = record.substring(15,19);
 		String airTempString;
 
 		if (record.charAt(87) == '+')
@@ -29,9 +40,18 @@ public class NcdcRecordParser
 		quality = record.substring(92, 93);
 	}
 
-	public void parse(Text record)
+	public boolean isMalformed()
 	{
-		parse(record.toString());
+		if (record.length() < 93)
+		{
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isMissing()
+	{
+		return airTemperature == MISSING_TEMPERATURE;
 	}
 
 	public boolean isValidTemperature()
@@ -48,9 +68,14 @@ public class NcdcRecordParser
 	{
 		return airTemperature;
 	}
-	
+
 	public String getStation()
 	{
 		return station;
+	}
+
+	public String getQuality()
+	{
+		return quality;
 	}
 }
