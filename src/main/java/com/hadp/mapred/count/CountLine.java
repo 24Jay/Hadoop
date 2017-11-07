@@ -1,4 +1,4 @@
-package com.hadp.mapred.chap2;
+package com.hadp.mapred.count;
 
 import java.io.IOException;
 

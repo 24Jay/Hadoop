@@ -13,6 +13,8 @@ public class NcdcRecord
 	private String quality;
 	private String station;
 
+	private boolean malformed = false;
+
 	public NcdcRecord(Text record)
 	{
 		this.record = record.toString();
@@ -25,7 +27,7 @@ public class NcdcRecord
 			return;
 
 		station = record.substring(4, 15);
-		year = record.substring(15,19);
+		year = record.substring(15, 19);
 		String airTempString;
 
 		if (record.charAt(87) == '+')
@@ -36,17 +38,25 @@ public class NcdcRecord
 		{
 			airTempString = record.substring(87, 92);
 		}
-		airTemperature = Integer.parseInt(airTempString);
+
+		try
+		{
+			airTemperature = Integer.parseInt(airTempString);
+
+		}
+		catch (NumberFormatException e)
+		{
+			malformed = true;
+		}
 		quality = record.substring(92, 93);
 	}
 
 	public boolean isMalformed()
 	{
 		if (record.length() < 93)
-		{
-			return true;
-		}
-		return false;
+			malformed = true;
+
+		return malformed;
 	}
 
 	public boolean isMissing()
@@ -56,7 +66,7 @@ public class NcdcRecord
 
 	public boolean isValidTemperature()
 	{
-		return airTemperature != MISSING_TEMPERATURE && quality.matches("[01459]");
+		return (!isMalformed()) && (!isMissing()) && quality.matches("[01459]");
 	}
 
 	public String getYear()

@@ -6,7 +6,6 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.lib.CombineFileInputFormat;
-import org.apache.hadoop.mapreduce.Counters;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -42,6 +41,11 @@ public class MaxTemperature
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(IntWritable.class);
 
+		/***
+		 * 设置reducer任务个数
+		 */
+		job.setNumReduceTasks(6);
+		
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
