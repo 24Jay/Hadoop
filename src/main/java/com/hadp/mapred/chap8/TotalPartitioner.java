@@ -1,6 +1,6 @@
 package com.hadp.mapred.chap8;
 
-public class Sample
+public class TotalPartitioner
 {
 
 }

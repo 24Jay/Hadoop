@@ -14,7 +14,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import com.hadp.mapred.NcdcRecord;
 
-public class LookupRecordByTemperature extends Configured implements Tool
+public class LookupRecord extends Configured implements Tool
 {
 
 	@Override
@@ -43,7 +43,7 @@ public class LookupRecordByTemperature extends Configured implements Tool
 	
 	public static void main(String []ar) throws Exception
 	{
-		int exit = ToolRunner.run(new LookupRecordByTemperature(), ar);
+		int exit = ToolRunner.run(new LookupRecord(), ar);
 		System.exit(exit);
 	}
 	

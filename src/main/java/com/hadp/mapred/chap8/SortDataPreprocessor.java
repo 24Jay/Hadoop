@@ -12,13 +12,14 @@ import org.apache.hadoop.io.compress.GzipCodec;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
+import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.SequenceFileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
 import com.hadp.mapred.NcdcRecord;
 
-public class ConvertText2Sequence extends Configured implements Tool
+public class SortDataPreprocessor extends Configured implements Tool
 {
 	static class SortMapper extends Mapper<LongWritable, Text, IntWritable, Text>
 	{
@@ -47,6 +48,12 @@ public class ConvertText2Sequence extends Configured implements Tool
 
 		job.setNumReduceTasks(0);
 
+//		job.setOutputFormatClass(FileOutputFormat.class);
+		
+		FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+
+		
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
 		FileInputFormat.addInputPath(job, new Path(args[0]));
@@ -62,7 +69,7 @@ public class ConvertText2Sequence extends Configured implements Tool
 
 	public static void main(String args[]) throws Exception
 	{
-		int exit = ToolRunner.run(new ConvertText2Sequence(), args);
+		int exit = ToolRunner.run(new SortDataPreprocessor(), args);
 		System.exit(exit);
 	}
 }
