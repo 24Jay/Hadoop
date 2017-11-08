@@ -14,7 +14,18 @@ import org.apache.hadoop.mapreduce.lib.partition.HashPartitioner;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
 
-public class TotalSortByDefault extends Configured implements Tool
+/****
+ * 部分排序: <br>
+ * hadoop com.hadp.mapred.chap8.SortByDefaultHash -D mapred.reduce.tasks=5<br>
+ * 
+ * <br>
+ * 全部排序: <br>
+ * hadoop com.hadp.mapred.chap8.SortByDefaultHash -D mapred.reduce.tasks=1<br>
+ * 
+ * @author jay
+ *
+ */
+public class SortByDefaultHash extends Configured implements Tool
 {
 
 	@Override
@@ -22,8 +33,11 @@ public class TotalSortByDefault extends Configured implements Tool
 	{
 		Job job = new Job(getConf());
 
-		job.setJarByClass(TotalSortByDefault.class);
-		
+		job.setJarByClass(SortByDefaultHash.class);
+
+		/**
+		 * 注意这里设置正确, 后面的查找操作才可以正常进行
+		 */
 		FileInputFormat.addInputPath(job, new Path(args[0]));
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 
@@ -33,9 +47,6 @@ public class TotalSortByDefault extends Configured implements Tool
 		job.setOutputKeyClass(IntWritable.class);
 
 		job.setPartitionerClass(HashPartitioner.class);
-		
-		
-		
 
 		SequenceFileOutputFormat.setCompressOutput(job, true);
 		SequenceFileOutputFormat.setOutputCompressorClass(job, GzipCodec.class);
@@ -46,7 +57,7 @@ public class TotalSortByDefault extends Configured implements Tool
 
 	public static void main(String[] ar) throws Exception
 	{
-		int exit = ToolRunner.run(new TotalSortByDefault(), ar);
+		int exit = ToolRunner.run(new SortByDefaultHash(), ar);
 		System.exit(exit);
 	}
 

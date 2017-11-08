@@ -19,7 +19,7 @@ import org.apache.hadoop.util.ToolRunner;
 
 import com.hadp.mapred.NcdcRecord;
 
-public class SortDataPreprocessor extends Configured implements Tool
+public class Preprocessor extends Configured implements Tool
 {
 	static class SortMapper extends Mapper<LongWritable, Text, IntWritable, Text>
 	{
@@ -50,8 +50,8 @@ public class SortDataPreprocessor extends Configured implements Tool
 
 //		job.setOutputFormatClass(FileOutputFormat.class);
 		
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+	/*	FileInputFormat.addInputPath(job, new Path(args[0]));
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));*/
 
 		
 		job.setOutputFormatClass(SequenceFileOutputFormat.class);
@@ -69,7 +69,7 @@ public class SortDataPreprocessor extends Configured implements Tool
 
 	public static void main(String args[]) throws Exception
 	{
-		int exit = ToolRunner.run(new SortDataPreprocessor(), args);
+		int exit = ToolRunner.run(new Preprocessor(), args);
 		System.exit(exit);
 	}
 }

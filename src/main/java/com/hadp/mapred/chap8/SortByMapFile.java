@@ -27,8 +27,8 @@ public class SortByMapFile  extends Configured implements Tool
 		job.setInputFormatClass(SequenceFileInputFormat.class);
 
 		job.setOutputKeyClass(IntWritable.class);
+
 		job.setOutputFormatClass(MapFileOutputFormat.class);
-		
 		
 		/**
 		 * 注意这里设置正确, 后面的查找操作才可以正常进行
